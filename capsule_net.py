@@ -37,8 +37,8 @@ if __name__ == "__main__":
     # setting the hyper parameters
     import argparse
     parser = argparse.ArgumentParser()
-    parser.add_argument('--batch_size', default=32, type=int)
-    parser.add_argument('--epochs', default=20, type=int)
+    parser.add_argument('--batch_size', default=128, type=int)
+    parser.add_argument('--epochs', default=100, type=int)
     parser.add_argument('--train', default=False, type=bool)
     args = parser.parse_args()
     print(args)
@@ -48,6 +48,6 @@ if __name__ == "__main__":
     net = CapsNet(32, ctx)
     print('====================================net====================================')
     trainer = Trainer(net.collect_params(),'adam', {'learning_rate': 0.01})
-    print_batches = 1000
+    print_batches = 250 
     utils.train(train_data, test_data, net, loss, trainer, ctx,
                 num_epochs=args.epochs, print_batches=print_batches)

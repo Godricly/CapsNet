@@ -58,15 +58,13 @@ def _get_batch(batch, ctx):
     return data.as_in_context(ctx), label.as_in_context(ctx)
 
 
-def evaluate_accuracy(data_iterator, net, ctx=mx.cpu()):
+def evaluate_accuracy(data_iterator, net, ctx=mx.gpu()):
     acc = 0.
-    if isinstance(data_iterator, mx.io.MXDataIter):
-        data_iterator.reset()
-        for i, batch in enumerate(data_iterator):
-            data, label = _get_batch(batch, ctx)
-            output = net(data)
-            acc += accuracy(output, label)
-            return acc / (i+1)
+    for i, batch in enumerate(data_iterator):
+        data, label = _get_batch(batch, ctx)
+        output = net(data)
+        acc += accuracy(output, label)
+    return acc / (i+1)
 
 
 def train(train_data, test_data, net, loss, trainer, ctx, num_epochs, print_batches=None):
@@ -90,6 +88,6 @@ def train(train_data, test_data, net, loss, trainer, ctx, num_epochs, print_batc
             if print_batches and n % print_batches == 0:
                 print("Batch %d. Loss: %f, Train acc %f" % (
                 n, train_loss/n, train_acc/n))
-    t_acc = evaluate_accuracy(test_data, net, ctx)
-    print("Epoch %d. Loss: %f, Train acc %f, Test acc %f" % (
-          epoch, train_loss/n, train_acc/n, test_acc))
+        test_acc = evaluate_accuracy(test_data, net, ctx)
+        print("Epoch %d. Loss: %f, Train acc %f, Test acc %f" % (
+              epoch, train_loss/n, train_acc/n, test_acc))

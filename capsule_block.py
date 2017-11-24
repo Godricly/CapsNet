@@ -68,7 +68,7 @@ class CapFullyBlock(nn.Block):
                 s = nd.sum(u_no_gradient * c_mat, axis=-1)
             v = squash(s, 1)
             v1 = nd.expand_dims(v, axis=-1)
-            if i != self.route_num -1:
+            if i != self.route_num - 1:
                 update_term = nd.sum(u_no_gradient*v1, axis=1, keepdims=True)
                 b_mat = b_mat + update_term
         # v = nd.stop_gradient(v)
