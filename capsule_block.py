@@ -81,3 +81,4 @@ class LengthBlock(nn.Block):
     def forward(self, x):
         x = nd.sqrt(nd.sum(nd.square(x), 1))
         return x
+

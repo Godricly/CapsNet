@@ -1,8 +1,8 @@
 # A MxNet implementation of Capsule
 
 ToDo:
-* Test
-* Train with FC parts
+* reconstruction result display
+* model saving and load
 * revised ReadMe
 * some fancy plots
 
