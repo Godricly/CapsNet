@@ -47,7 +47,7 @@ if __name__ == "__main__":
     train_data, test_data = utils.load_data_mnist(batch_size=args.batch_size,resize=28)
     net = CapsNet(32, ctx)
     print('====================================net====================================')
-    trainer = Trainer(net.collect_params(),'adam', {'learning_rate': 0.01})
+    trainer = Trainer(net.collect_params(),'adam', {'learning_rate': 0.001})
     print_batches = 250 
     utils.train(train_data, test_data, net, loss, trainer, ctx,
                 num_epochs=args.epochs, print_batches=print_batches)
