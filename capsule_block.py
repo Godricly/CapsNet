@@ -61,7 +61,6 @@ class CapFullyBlock(nn.Block):
         u_no_gradient = nd.stop_gradient(u)
         for i in range(self.route_num):
             c_mat = nd.softmax(b_mat, axis=2)
-            # print c_mat
             if i == self.route_num -1:
                 s = nd.sum(u * c_mat, axis=-1)
             else:
@@ -71,7 +70,6 @@ class CapFullyBlock(nn.Block):
             if i != self.route_num - 1:
                 update_term = nd.sum(u_no_gradient*v1, axis=1, keepdims=True)
                 b_mat = b_mat + update_term
-        # v = nd.stop_gradient(v)
         return v
 
 class LengthBlock(nn.Block):

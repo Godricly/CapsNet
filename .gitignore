@@ -105,3 +105,4 @@ data
 
 #vim
 *.swp
+*.params
