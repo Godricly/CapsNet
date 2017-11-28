@@ -14,6 +14,13 @@ input | rec output
 [input_im]: rec/input_x.png "input image"
 [rec_im]: rec/rec_x.png "rec image"
 
+# Interpolation
+Each row shows interpolation alone one dim.(Looks not good now). Maybe I should use mean value for each digits.(later work)
+
+![alt text][interpolation]
+[interpolation]: interpolation.gif "interpolation"
+
+
 # Reference
 [Capsule\_MxNet](https://github.com/AaronLeong/CapsNet_Mxnet) Some codes are cropped from this repo, However I'm concerned with its implementation
 

@@ -34,7 +34,7 @@ def vis_square(data):
 if __name__ == "__main__":
     # setting the hyper parameters
     parser = argparse.ArgumentParser()
-    parser.add_argument('--batch_size', default=128, type=int)
+    parser.add_argument('--batch_size', default=256, type=int)
     parser.add_argument('--recon', action='store_true')
     args = parser.parse_args()
     print(args)
@@ -56,4 +56,17 @@ if __name__ == "__main__":
            recoutput = recnet(masked_capoutput)
            rec_x = vis_square(recoutput.asnumpy().reshape(-1,28,28))
            cv2.imwrite('rec/rec_x.png', (rec_x*255).astype(int))
+
+           # each row in display correspond to same dim
+           dim_mask = nd.zeros(capout.shape, ctx)
+           n = int(np.ceil(np.sqrt(args.batch_size)))
+           for i in range(args.batch_size):
+               dim_mask[i, (i / n) %dim_mask.shape[1], :] = 1
+
+           for i, v in enumerate(np.arange(-0.25, 0.3, 0.05)):
+               cap_mod = (capout + v * dim_mask) * nd.expand_dims(one_hot_label, axis=1)
+               recoutput = recnet(cap_mod)
+               rec_x = vis_square(recoutput.asnumpy().reshape(-1,28,28))
+               cv2.imwrite('rec/rec_x_' + str(i) + '.png', (rec_x*255).astype(int))
+
         break
