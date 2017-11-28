@@ -9,7 +9,8 @@ ToDo:
 
 input | rec output
 ------| -------
-![alt text][input_im]     | ![alt text][rec_im]
+![alt text][input_im]|![alt text][rec_im]
+
 [input_im]: rec/input_x.png "input image"
 [rec_im]: rec/rec_x.png "rec image"
 
