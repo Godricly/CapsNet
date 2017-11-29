@@ -18,6 +18,7 @@ input | rec output
 Each row shows interpolation alone one dim.(Looks not good now). Maybe I should use mean value for each digits.(later work)
 
 ![alt text][interpolation]
+
 [interpolation]: interpolation.gif "interpolation"
 
 
