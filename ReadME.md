@@ -1,9 +1,21 @@
 # A MxNet implementation of Capsule
 
+# How to use
+
+## Train
+Model training
+```
+python train.py
+```
+## Test
+Show reconstruction result and interpolation result
+```
+python test.py
+```
+
 ToDo:
-* capsule interpolation example
-* revised ReadMe
-* some fancy plots
+* revised ReadMe ???
+* more fancy plots???
 
 # Rec Result
 
