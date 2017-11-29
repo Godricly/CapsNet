@@ -15,8 +15,7 @@ input | rec output
 [rec_im]: rec/rec_x.png "rec image"
 
 # Interpolation
-Each row shows interpolation alone one dim.(Looks not good now). Maybe I should use mean value for each digits.(later work)
-
+Each row shows interpolation of one digit alone different channel.  
 ![alt text][interpolation]
 
 [interpolation]: interpolation.gif "interpolation"
