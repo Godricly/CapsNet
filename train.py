@@ -16,8 +16,8 @@ if __name__ == "__main__":
     args = parser.parse_args()
     print(args)
 
-    print_batches = 250 
-    ctx = mx.gpu(0)
+    print_batches = 50 
+    ctx = mx.gpu(1)
     train_data, test_data = utils.load_data_mnist(batch_size=args.batch_size,resize=28)
     capnet = CapsNet(args.batch_size, ctx)
     clsnet = ClsNet(args.batch_size, ctx)

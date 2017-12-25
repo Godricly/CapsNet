@@ -3,6 +3,7 @@ from mxnet import init
 from mxnet import nd
 from mxnet.gluon import nn
 from capsule_block import CapConvBlock, CapFullyBlock, LengthBlock
+from conv_cap import AdvConvCap, PrimeConvCap
 
 
 
@@ -12,8 +13,8 @@ def CapsNet(batch_size, ctx):
     with net.name_scope():
         net.add(nn.Conv2D(channels=256, kernel_size=9, strides=1,
                               padding=(0,0), activation='relu'))
-        net.add(CapConvBlock(32, 8, kernel_size=(9, 9),
-                                strides=(2, 2), padding=(0,0), context=ctx))
+        net.add(PrimeConvCap(32,8, kernel_size=(9,9), strides=(2,2), padding=(0,0)))
+        # net.add(AdvConvCap(32,8,32,8,3))
         net.add(CapFullyBlock(36*32,10,8,16,context=ctx))
         net.initialize(ctx=ctx, init=init.Xavier())
     return net

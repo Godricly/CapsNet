@@ -41,21 +41,17 @@ class CapFullyBlock(nn.Block):
         self.w_ij = self.params.get(
              'weight', shape=(input_units, units, self.num_cap, self.num_locations)
              ,init=init.Xavier()) 
-        # self.b_mat = self.params.get(
-        #      'bias', shape=(1, 1, self.num_cap, self.num_locations), init=init.Zero())
 
     def forward(self, x):
         # reshape x into [batch_size, channel, num_previous_cap]
-        x_reshape = x.reshape((0,0,-1))
+        x_reshape = nd.transpose(x,(0,2,1,3,4)).reshape((0,0,-1))
         return self.Route(x_reshape)
 
     def Route(self, x):
         # b_mat = nd.repeat(self.b_mat.data(), repeats=x.shape[0], axis=0)#nd.stop_gradient(nd.repeat(self.b_mat.data(), repeats=x.shape[0], axis=0))
         b_mat = nd.zeros((x.shape[0],1,self.num_cap, self.num_locations), ctx=x.context)
-        x_expand = nd.repeat(nd.expand_dims(x,2), repeats=self.num_cap, axis=2)
-        x_expand = nd.repeat(nd.expand_dims(x_expand, axis=2),
-                             repeats=self.units, axis=2)
-        w_expand = nd.expand_dims(self.w_ij.data(),axis=0)
+        x_expand = nd.expand_dims(nd.expand_dims(x, axis=2),2)
+        w_expand = nd.repeat(nd.expand_dims(self.w_ij.data(),axis=0), repeats=x.shape[0], axis=0)
         u_ = w_expand*x_expand
         u = nd.sum(u_, axis = 1)
         u_no_gradient = nd.stop_gradient(u)
