@@ -14,7 +14,8 @@ def CapsNet(batch_size, ctx):
         net.add(nn.Conv2D(channels=256, kernel_size=9, strides=1,
                               padding=(0,0), activation='relu'))
         net.add(PrimeConvCap(32,8, kernel_size=(9,9), strides=(2,2), padding=(0,0)))
-        # net.add(AdvConvCap(32,8,32,8,3))
+        net.add(AdvConvCap(32,8,32,8,3))
+        # net.add(AdvConvCap(32,8,1,256,1, kernel_size=(9,9), strides=(2,2), padding=(0,0)))
         net.add(CapFullyBlock(36*32,10,8,16,context=ctx))
         net.initialize(ctx=ctx, init=init.Xavier())
     return net
